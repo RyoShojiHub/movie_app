@@ -1,9 +1,8 @@
 import tkinter as tk
 
-from ui import video_player
-from ui import home_ui
-from ui import upload_form
-import api_client
+from ui.home_ui import HomeUI
+from ui.upload_form import UploadFormUI
+from ui.video_player import VideoPlayerUI
 
 
 class App(tk.Tk):
@@ -11,26 +10,27 @@ class App(tk.Tk):
         super().__init__()
         self.title('Video App')
         self.geometry("1280x800")
-        self.home_frame = home_ui.HomeUi()
-        self.video_player_frame = video_player.VideoPlayer()
-        self.upload_form_frame = upload_form.UploadForm()
+        self.frames = {}
+        self.create_frames()
+        self.show_frame("HomeUI")
 
-        self.show_home()
+    def create_frames(self):
+        self.frames["HomeUI"] = HomeUI(self)
+        self.frames["VideoPlayerUI"] = VideoPlayerUI(self)
+        self.frames["UploadFormUI"] = UploadFormUI(self)
 
-    def show_home(self):
-        self.clear_frames()
-        video_data = api_client.get_video_data()
-        self.home_frame.display_home(video_data)
-        self.home_frame.pack(fill=tk.BOTH, expand=True)
+        # 全フレームを重ねて配置
+        for frame in self.frames.values():
+            frame.pack(fill=tk.BOTH, expand=True)
 
-    def show_upload_form(self):
-        self.clear_frames()
-        self.upload_form_frame.pack(fill=tk.BOTH, expand=True)
+    def show_frame(self, frame_name):
+        # 表示されているフレームを非表示にする
+        for frame in self.frames.values():
+            frame.pack_forget()
 
-    def clear_frames(self):
-        self.home_frame.pack_forget()
-        self.video_player_frame.pack_forget()
-        self.upload_form_frame.pack_forget()
+        # 指定されたフレームを前面に表示
+        frame = self.frames[frame_name]
+        frame.pack(fill=tk.BOTH, expand=True)
 
 
 if __name__ == '__main__':
