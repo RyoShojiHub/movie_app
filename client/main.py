@@ -10,6 +10,7 @@ class App(tk.Tk):
         super().__init__()
         self.title('Video App')
         self.geometry("1280x800")
+        self.resizable(width=False, height=False)
         self.frames = {}
         self.create_frames()
         self.show_frame("HomeUI")

@@ -19,6 +19,15 @@ def init_db():
     connection.close()
 
 
+def get_alldata():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM videos')
+    all_data = cursor.fetchall()
+    conn.close()
+    return all_data
+
+
 def insert_data(id, video_name, video_file_path, thumbnail_file_path):
     insert_query = '''
     INSERT INTO videos (id, video_name, video_file_path, thumbnail_file_path, uploaded_at)
@@ -36,3 +45,20 @@ def insert_data(id, video_name, video_file_path, thumbnail_file_path):
     finally:
         conn.close()
     return True
+
+
+def delete_data(id):
+    delete_query = '''
+    DELETE FROM videos WHERE id=?;
+    '''
+
+    conn = get_db_connection()
+    try:
+        conn.execute(delete_query, (id,))
+        conn.commit()
+    except Exception as e:
+        return e
+    finally:
+        conn.close()
+    return True
+

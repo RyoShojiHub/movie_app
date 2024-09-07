@@ -2,7 +2,7 @@ import os
 
 from flask import Blueprint, jsonify, url_for, send_from_directory
 
-from server.database import get_db_connection
+from server import database
 
 home_bp = Blueprint('home', __name__)
 
@@ -13,12 +13,7 @@ THUMBNAIL_FOLDER = os.path.join(BASE_DIR, 'thumbnails')
 
 @home_bp.route('/', methods=['GET'])
 def home():
-    connection = get_db_connection()
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM videos")
-    video_datas = cursor.fetchall()
-
-    connection.close()
+    video_datas = database.get_alldata()
 
     video_list = []
     for video_data in video_datas:
