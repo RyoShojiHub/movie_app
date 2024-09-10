@@ -9,7 +9,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('Video App')
-        self.geometry("1280x800")
+        self.geometry("1280x750")
         self.resizable(width=False, height=False)
         self.frames = {}
         self.create_frames()

@@ -15,9 +15,20 @@ class VideoPlayerUI(tk.Frame):
     def create_ui(self):
         # 戻るボタン
         button_frame = tk.Frame(self)
-        button_frame.pack(fill=tk.X)
-        back_button = tk.Button(button_frame, text="ホームに戻る", command=self.go_home)
-        back_button.pack(side=tk.LEFT, padx=5, pady=5)
+        button_frame.pack(fill=tk.X, pady=10)
+        back_button = tk.Button(
+            button_frame,
+            text="ホームに戻る",
+            command=self.go_home,
+            bg="#FF7043",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            padx=10,
+            pady=5,
+            relief="raised",
+            cursor="hand2"
+        )
+        back_button.pack(side=tk.LEFT, padx=5)
 
         # 動画再生用のキャンバス
         self.canvas = tk.Canvas(self, bg="black")

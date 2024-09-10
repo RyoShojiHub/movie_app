@@ -21,7 +21,8 @@ def home():
             'video_id': video_data['id'],
             'video_name': video_data['video_name'],
             'thumbnail_file_path': url_for('home.get_thumbnail', filename=video_data['thumbnail_file_path'], _external=True),
-            'video_file_path': url_for('stream.stream_video', filename=video_data['video_file_path'],_external=True)
+            'video_file_path': url_for('stream.stream_video', filename=video_data['video_file_path'],_external=True),
+            'uploaded_at': video_data['uploaded_at']
         }
         video_list.append(video_info)
 

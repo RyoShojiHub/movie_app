@@ -14,30 +14,74 @@ class UploadFormUI(tk.Frame):
     def create_form(self):
         # 戻るボタン
         button_frame = tk.Frame(self)
-        button_frame.pack(fill=tk.X)
-        back_button = tk.Button(button_frame, text="ホームに戻る", command=self.go_home)
-        back_button.pack(side=tk.LEFT, padx=5, pady=5)
+        button_frame.pack(fill=tk.X, pady=10)
+        back_button = tk.Button(
+            button_frame,
+            text="ホームに戻る",
+            command=self.go_home,
+            bg="#FF7043",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            padx=10,
+            pady=5,
+            relief="raised",
+            cursor="hand2"
+        )
+        back_button.pack(side=tk.LEFT, padx=5)
 
         # タイトル入力フィールド
-        title_label = tk.Label(self, text="動画タイトル:")
-        title_label.pack()
-        self.title_entry = tk.Entry(self, width=50)
+        title_label = tk.Label(self, text="動画タイトル:", font=("Arial", 12))
+        title_label.pack(pady=5)
+        self.title_entry = tk.Entry(self, width=50, font=("Arial", 10))
         self.title_entry.pack(pady=5)
 
         # 動画ファイル選択ボタン
-        video_button = tk.Button(self, text="動画ファイルを選択", command=self.select_video)
+        video_button = tk.Button(
+            self,
+            text="動画ファイルを選択",
+            command=self.select_video,
+            bg="#42A5F5",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            padx=10,
+            pady=5,
+            relief="raised",
+            cursor="hand2"
+        )
         video_button.pack(pady=10)
-        self.video_label = tk.Label(self, text="選択された動画ファイル: なし")
+        self.video_label = tk.Label(self, text="選択された動画ファイル: なし", font=("Arial", 10))
         self.video_label.pack()
 
         # サムネイル選択ボタン
-        thumbnail_button = tk.Button(self, text="サムネイルを選択", command=self.select_thumbnail)
+        thumbnail_button = tk.Button(
+            self,
+            text="サムネイルを選択",
+            command=self.select_thumbnail,
+            bg="#42A5F5",
+            fg="white",
+            font=("Arial", 10, "bold"),
+            padx=10,
+            pady=5,
+            relief="raised",
+            cursor="hand2"
+        )
         thumbnail_button.pack(pady=10)
-        self.thumbnail_label = tk.Label(self, text="選択されたサムネイル: なし")
+        self.thumbnail_label = tk.Label(self, text="選択されたサムネイル: なし", font=("Arial", 10))
         self.thumbnail_label.pack()
 
         # アップロードボタン
-        upload_button = tk.Button(self, text="アップロード", command=self.upload_video)
+        upload_button = tk.Button(
+            self,
+            text="アップロード",
+            command=self.upload_video,
+            bg="#66BB6A",
+            fg="white",
+            font=("Arial", 12, "bold"),
+            padx=10,
+            pady=5,
+            relief="raised",
+            cursor="hand2"
+        )
         upload_button.pack(pady=20)
 
     def select_video(self):
