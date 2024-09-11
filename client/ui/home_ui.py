@@ -12,38 +12,63 @@ from client import api_client
 class HomeUI(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.master = master
         self.pack(fill=tk.BOTH, expand=True)
+
+        # 各種ボタンを配置するフレーム
+        self.button_frame = tk.Frame(self, bg="white")
+        self.button_frame.pack(fill=tk.X, anchor=tk.N)
+        self.create_buttons(self.button_frame)
+
+        # スクロール可能なキャンバスとコンテンツ配置
         self.canvas = tk.Canvas(self)
         self.canvas.pack(fill=tk.BOTH, expand=True)
         self.scrollable_frame = self.create_scroll_area(self.canvas)
-        self.create_upload_button()
         self.display_home()
 
-    def create_upload_button(self):
-        frame = tk.Frame(self.scrollable_frame, bg="white")
-        frame.pack(fill=tk.X)
-
+    def create_buttons(self, frame):
+        # アップロードボタンの設定
         upload_icon = PhotoImage(file=os.path.join("ui", "icon01.png"))
         upload_button = tk.Button(
             frame,
             text=" 動画のアップロード",
             image=upload_icon,
-            compound=tk.LEFT,  # テキストとアイコンを左揃え
+            compound=tk.LEFT,
             command=self.go_to_upload,
             font=("Arial", 12, "bold"),
-            bg="#4CAF50",  # ボタンの背景色
-            fg="white",  # テキストの色
-            activebackground="#45a049",  # ホバー時の背景色
-            activeforeground="white",  # ホバー時のテキスト色
-            relief="raised",  # ボタンの立体的な見た目
-            bd=3,  # ボーダーの太さ
+            bg="#4CAF50",
+            fg="white",
+            activebackground="#45a049",
+            activeforeground="white",
+            relief="raised",
+            bd=3,
             padx=10,
             pady=5,
-            cursor="hand2",  # マウスカーソルを手の形にする
+            cursor="hand2",
         )
         upload_button.image = upload_icon
-        upload_button.pack(side=tk.TOP, pady=10)
+        upload_button.pack(side=tk.LEFT, padx=20, pady=10)
+
+        # 更新ボタンの設定
+        refresh_icon = PhotoImage(file=os.path.join("ui", "icon02.png"))
+        refresh_button = tk.Button(
+            frame,
+            text=" 更新",
+            image=refresh_icon,
+            compound=tk.LEFT,
+            command=self.display_home,
+            font=("Arial", 12, "bold"),
+            bg="#42A5F5",  # ボタンの背景色
+            fg="white",  # テキストの色
+            activebackground="#1E88E5",  # ホバー時の背景色
+            activeforeground="white",  # ホバー時のテキスト色
+            relief="raised",
+            bd=3,
+            padx=10,
+            pady=5,
+            cursor="hand2",
+        )
+        refresh_button.image = refresh_icon
+        refresh_button.pack(side=tk.LEFT, padx=10, pady=10)
 
     def create_scroll_area(self, canvas):
         # スクロール可能なフレームの作成
@@ -64,6 +89,10 @@ class HomeUI(tk.Frame):
         return scrollable_frame
 
     def display_home(self):
+        # 既存の内容をクリア
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+
         main_frame = tk.Frame(self.scrollable_frame, bg="white")
         main_frame.pack(fill=tk.BOTH, expand=True)
 

@@ -122,4 +122,5 @@ class UploadFormUI(tk.Frame):
 
 
     def go_home(self):
+        self.master.frames["HomeUI"].display_home()
         self.master.show_frame("HomeUI")  # ホーム画面に切り替える

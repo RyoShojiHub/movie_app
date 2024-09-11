@@ -6,18 +6,24 @@ import ctypes
 
 class VideoPlayerUI(tk.Frame):
     def __init__(self, master):
-        super().__init__(master)
+        super().__init__(master, bg="white")
         self.master = master
         self.pack(fill=tk.BOTH, expand=True)
-        self.player = None
-        self.create_ui()
 
-    def create_ui(self):
+        # 各種ボタンの配置
+        self.button_frame = tk.Frame(self, bg="white")
+        self.button_frame.pack(fill=tk.X, pady=10)
+        self.create_buttons(self.button_frame)
+
+        # 動画再生用のキャンバス
+        self.canvas = tk.Canvas(self, bg="white")
+        self.canvas.pack(fill=tk.BOTH, expand=True)
+        self.player = None
+
+    def create_buttons(self, frame):
         # 戻るボタン
-        button_frame = tk.Frame(self)
-        button_frame.pack(fill=tk.X, pady=10)
         back_button = tk.Button(
-            button_frame,
+            frame,
             text="ホームに戻る",
             command=self.go_home,
             bg="#FF7043",
@@ -29,10 +35,6 @@ class VideoPlayerUI(tk.Frame):
             cursor="hand2"
         )
         back_button.pack(side=tk.LEFT, padx=5)
-
-        # 動画再生用のキャンバス
-        self.canvas = tk.Canvas(self, bg="black")
-        self.canvas.pack(fill=tk.BOTH, expand=True)
 
     def play_video(self, video_path):
         if self.player:
