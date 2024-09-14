@@ -8,6 +8,9 @@ from PIL import Image, ImageTk
 
 from client import api_client
 
+# uiディレクトリの絶対パス
+UI_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 class HomeUI(tk.Frame):
     def __init__(self, master):
@@ -27,7 +30,7 @@ class HomeUI(tk.Frame):
 
     def create_buttons(self, frame):
         # アップロードボタンの設定
-        upload_icon = PhotoImage(file=os.path.join("ui", "icon01.png"))
+        upload_icon = PhotoImage(file=os.path.join(UI_DIR, "icon01.png"))
         upload_button = tk.Button(
             frame,
             text=" 動画のアップロード",
@@ -49,7 +52,7 @@ class HomeUI(tk.Frame):
         upload_button.pack(side=tk.LEFT, padx=20, pady=10)
 
         # 更新ボタンの設定
-        refresh_icon = PhotoImage(file=os.path.join("ui", "icon02.png"))
+        refresh_icon = PhotoImage(file=os.path.join(UI_DIR, "icon02.png"))
         refresh_button = tk.Button(
             frame,
             text=" 更新",

@@ -1,10 +1,17 @@
+import os
+import sys
+
 from flask import Flask
 
-from database import init_db
-from processes import home
-from processes import stream
-from processes import upload
+# どこからでも実行できるようにパスを調整
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.append(project_root)
 
+from server.database import init_db
+from server.processes import home
+from server.processes import stream
+from server.processes import upload
 
 app = Flask(__name__)
 

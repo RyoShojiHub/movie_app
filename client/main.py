@@ -1,8 +1,14 @@
+import os
+import sys
 import tkinter as tk
 
-from ui.home_ui import HomeUI
-from ui.upload_form import UploadFormUI
-from ui.video_player import VideoPlayerUI
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
+from client.ui.home_ui import HomeUI
+from client.ui.upload_form import UploadFormUI
+from client.ui.video_player import VideoPlayerUI
 
 
 class App(tk.Tk):
