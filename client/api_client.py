@@ -4,7 +4,9 @@ import os
 from PIL import Image
 from io import BytesIO
 
-URL = 'http://127.0.0.1:5000'
+# サーバのURL
+with open('URL.txt', 'r') as f:
+    URL = f.readline().strip()
 
 
 def get_video_data():

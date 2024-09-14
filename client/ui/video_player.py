@@ -1,7 +1,5 @@
 import tkinter as tk
 import vlc
-import os
-import ctypes
 
 
 class VideoPlayerUI(tk.Frame):

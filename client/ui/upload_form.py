@@ -1,3 +1,4 @@
+import os.path
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import requests
@@ -10,6 +11,11 @@ class UploadFormUI(tk.Frame):
         self.video_path = None
         self.thumbnail_path = None
         self.create_form()
+
+        # サーバのURLを取得
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        with open(os.path.join(base_dir, 'URL.txt')) as f:
+            self.URL = f.readline().strip()
 
     def create_form(self):
         # 戻るボタン
@@ -103,6 +109,10 @@ class UploadFormUI(tk.Frame):
             messagebox.showerror("エラー", "すべてのフィールドを入力してください")
             return
 
+        if len(video_title) >= 30:
+            messagebox.showerror("エラー", "動画タイトルは30字以内で入力してください")
+            return
+
         # サーバにデータをアップロード
         try:
             with open(self.video_path, 'rb') as video_file, open(self.thumbnail_path, 'rb') as thumbnail_file:
@@ -111,7 +121,7 @@ class UploadFormUI(tk.Frame):
                     'thumbnail': thumbnail_file
                 }
                 data = {'title': video_title}
-                response = requests.post('http://127.0.0.1:5000/upload', files=files, data=data)
+                response = requests.post(f'{self.URL}/upload', files=files, data=data)
                 if response.status_code == 201:
                     messagebox.showinfo("成功", "動画のアップロードに成功しました")
                     self.go_home()
