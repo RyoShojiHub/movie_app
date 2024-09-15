@@ -21,4 +21,4 @@ app.register_blueprint(stream.stream_bp, url_prefix='/stream')
 
 if __name__ == '__main__':
     init_db()  # データベース初期化
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)

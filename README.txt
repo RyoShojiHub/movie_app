@@ -15,7 +15,7 @@ pip install -r requirements.txt
 サーバを起動します。
 python server\main.py
 
-クライアントを起動します
+クライアントを起動します(必要に応じてclient\URL.txtのIPアドレスを書き換えてください)。
 python client\main.py
 
 
